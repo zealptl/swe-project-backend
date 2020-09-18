@@ -1,4 +1,4 @@
-# SWE-project-backend
+# Software Engineering Project - Backend
 
 This is the backend service the project. It was deleveloped by Bhavesh Shah, Zeal Patel, Greg Kimatov, Yihui Wuchen, and Victoria Yang for our Software Engineering class using Typescript, Node, Express, MongoDB, and Mongoose.
 
