@@ -1,6 +1,8 @@
 # SWE-project-backend
 
-This is the backend service for CSC 322 - Software Engineering class project. It is deleveloped using Typescript, Node, Express, MongoDB, and Mongoose.
+This is the backend service the project. It was deleveloped by Bhavesh Shah, Zeal Patel, Greg Kimatov, Yihui Wuchen, and Victoria Yang for our Software Engineering class using Typescript, Node, Express, MongoDB, and Mongoose.
+
+Project description coming soon.
 
 ## Setup
 
