@@ -1,6 +1,8 @@
-# SWE-project-backend
+# Software Engineering Project - Backend
 
-This is the backend service for CSC 322 - Software Engineering class project. It is deleveloped using Typescript, Node, Express, MongoDB, and Mongoose.
+This is the backend service the project. It was deleveloped by Bhavesh Shah, Zeal Patel, Greg Kimatov, Yihui Wuchen, and Victoria Yang for our Software Engineering class using Typescript, Node, Express, MongoDB, and Mongoose.
+
+Project description coming soon.
 
 ## Setup
 
@@ -58,7 +60,7 @@ Create a route file for each model that will conist of the REST methods.
 
 ## Available scripts
 
-### `npm run server`
+#### `npm run server`
 
 Starts a nodemon server that watches changes to your TypeScript code and refresh the server without having to run node command after each change.
 
@@ -66,14 +68,14 @@ It should print `Server started on port 5000` and `MongoDB Connected` if everyth
 
 Run this script to make requests using Postman.
 
-### `npm run build`
+#### `npm run build`
 
 Builds the app for production to the `build` folder.
 
-### `npm run start`
+#### `npm run start`
 
 Runs production version of the code
 
-### `npm run test`
+#### `npm run test`
 
 Runs the test files
