@@ -28,10 +28,10 @@ npm i
 
 ##### Setup MongoDB
 
-Create a `.env` file in your root directory and paste the following and replace your credentials
+Create a `.env` file in your repository folder, paste the following and replace your username, and password with your credentials
 
 ```
-DB_URI=mongodb+srv://<username>:<password>@swe-db.sejgt.mongodb.net/<dbname>?retryWrites=true&w=majority
+DB_URI=mongodb+srv://username:password@swe-db.sejgt.mongodb.net/<dbname>?retryWrites=true&w=majority
 ```
 
 ## Repo Structure

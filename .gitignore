@@ -5,3 +5,5 @@ config/default.json
 build/
 
 .env
+
+SWEProject.pem
