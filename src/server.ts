@@ -23,7 +23,7 @@ app.get('/', (req: Request, res: Response) => {
 // define router paths
 app.use('/api/health', healthRouter);
 app.use('/api/customers', jsonParser, customerRouter);
-app.use('/api/manager', managerRouter);
+app.use('/api/manager', jsonParser, managerRouter);
 
 const PORT = process.env.PORT || 5000;
 
