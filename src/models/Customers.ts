@@ -1,9 +1,6 @@
-import { Schema } from "mongoose";
-import { Document } from 'mongoose';
-
-import importedMongoose = require('mongoose');
-
-const mongoose = importedMongoose;
+import { Document, model, Mongoose, Schema } from 'mongoose';
+import { Reviews } from './Reviews';
+import { MenuItems } from './MenuItems';
 
 export interface Customers extends Document {
   username: string;
@@ -16,14 +13,14 @@ export interface Customers extends Document {
   isVIP: boolean;
   amountSpent: number;
   balance: number;
-  ordersMade: Array<number>; // change to array of dishes
-  reviews: Array<number>; // change to array of reviews
+  ordersMade: Array<MenuItems>; // array of dishes
+  reviews: Array<Reviews>; // array of reviews
   warnings: number;
   created_at: Date;
   updated_at: Date;
 }
 
-const CustomersSchema : Schema = new mongoose.Schema({
+const customersSchema : Schema = new Schema({
   username: {
     type: String,
     unique: true,
@@ -43,6 +40,7 @@ const CustomersSchema : Schema = new mongoose.Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: 'Please enter your email'
   },
   address: {
@@ -86,5 +84,5 @@ const CustomersSchema : Schema = new mongoose.Schema({
 });
 
 
-//export default mongoose.model<Customers>('CustomersModel', CustomersSchema);
-module.exports = mongoose.model('CustomersModel', CustomersSchema);
+export default model<Customers>('Customers', customersSchema);
+//module.exports = mongoose.model('Customers', customersSchema);

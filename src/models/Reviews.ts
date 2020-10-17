@@ -1,6 +1,7 @@
 import { Document, model, Mongoose, Schema } from 'mongoose';
 
-export interface Reivews extends Document {
+
+export interface Reviews extends Document {
   review: String;
   reviewFrom: String;
   reviewTo: String;
@@ -20,4 +21,4 @@ const reviewSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-export default model<Reivews>('Reviews', reviewSchema);
+export default model<Reviews>('Reviews', reviewSchema);

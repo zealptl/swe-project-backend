@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
-import { Customers } from '../../models/CustomersModel';
+import { Customers } from '../../models/Customers';
 
-const CustomerModel = require("../../models/CustomersModel");
+const Customer = require("../../models/Customers");
 
 export const createCustomerMiddleware = (req: Request, res: Response) => {
     console.log(req.body);
-    const newCustomer = new CustomerModel({
+    const newCustomer = new Customer({
         username: req.body.username,
         password: req.body.password,
         firstName: req.body.firstName,
