@@ -1,5 +1,5 @@
 import express from 'express';
-import { approveCustomerMiddleware } from './middlewares/approveCustomer';
+import { approveCustomerMiddleware } from './controllers/approveCustomer';
 
 const router = express.Router();
 router.post('/approve/:customerId', approveCustomerMiddleware);

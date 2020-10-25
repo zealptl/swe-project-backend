@@ -1,5 +1,5 @@
 import express from 'express';
-import { healthMiddleware } from './middlewares/health';
+import { healthMiddleware } from './controllers/health';
 
 const router = express.Router();
 router.get('/', healthMiddleware);
