@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import CustomersModel, { Customers } from '../../models/Customers';
+import CustomersModel, { Customers } from '../../../models/Customers';
 const bcryptjs = require('bcryptjs');
 
-export const createCustomerMiddleware = async (req: Request, res: Response) => {
+export const createCustomer = async (req: Request, res: Response) => {
   try {
     let customer: Customers | null = await CustomersModel.findOne({
       email: req.body.email,

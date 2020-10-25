@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import CustomersModel from '../../models/Customers';
+import CustomersModel from '../../../models/Customers';
 
 export const getSignedInUserMiddleware = async (
   req: Request,

@@ -1,7 +1,7 @@
 import express from 'express';
-import { approveCustomerMiddleware } from './controllers/approveCustomer';
+import { approveCustomer } from './controllers/ManagerControllers/approveCustomer';
 
 const router = express.Router();
-router.post('/approve/:customerId', approveCustomerMiddleware);
+router.post('/approve/:customerId', approveCustomer);
 
 export default router;

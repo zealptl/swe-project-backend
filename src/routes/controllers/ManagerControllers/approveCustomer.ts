@@ -1,12 +1,12 @@
 import { Request, Response } from 'express';
 import axios, {AxiosResponse} from 'axios';
 
-const Customer = require("../../models/Customers");
+const Customer = require("../../../models/Customers");
 
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-export const approveCustomerMiddleware = (req: Request, res: Response) => {
+export const approveCustomer = (req: Request, res: Response) => {
   Customer.findOneAndUpdate({ _id: req.params.customerId }, { isApproved: true })
     .then(() => {
       var link = 'http://localhost:5000/api/customers/' + req.params.customerId;

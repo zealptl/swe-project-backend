@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import CustomersModel from '../../models/Customers';
-import { createCustomerMiddleware } from './createCustomer';
+import { createCustomer } from '../CustomerControllers/createCustomer';
 
 export const signUpUserMiddleware = async (req: Request, res: Response) => {
   try {
     switch (req.query.role) {
       case 'customer':
-        await createCustomerMiddleware(req, res);
+        await createCustomer(req, res);
         break;
 
       default:

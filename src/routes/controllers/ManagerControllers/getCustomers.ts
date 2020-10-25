@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import CustomersModel, { Customers } from '../../models/Customers';
+import CustomersModel, { Customers } from '../../../models/Customers';
 
 export const getCustomersMiddleware = async (req: Request, res: Response) => {
   const customers: Customers[] | null = await CustomersModel.find({}).select(
