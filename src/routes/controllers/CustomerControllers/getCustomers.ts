@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CustomersModel, { Customers } from '../../../models/Customers';
 
-export const getCustomersMiddleware = async (req: Request, res: Response) => {
+export const getCustomers = async (req: Request, res: Response) => {
   const customers: Customers[] | null = await CustomersModel.find({}).select(
     '-password'
   );

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { createCustomer } from '../CustomerControllers/createCustomer';
 
-export const signUpUserMiddleware = async (req: Request, res: Response) => {
+export const signUpUser = async (req: Request, res: Response) => {
   try {
     switch (req.query.role) {
       case 'customer':

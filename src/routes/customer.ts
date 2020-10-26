@@ -1,11 +1,11 @@
 import express from 'express';
 import { createCustomer } from './controllers/CustomerControllers/createCustomer';
-import { getCustomersMiddleware } from './controllers/ManagerControllers/getCustomers';
-import { getCustomerMiddleware } from './controllers/ManagerControllers/getCustomer';
+import { getCustomers } from './controllers/CustomerControllers/getCustomers';
+import { getCustomer } from './controllers/CustomerControllers/getCustomer';
 
 const router = express.Router();
 router.post('/', createCustomer);
-router.get('/', getCustomersMiddleware); // get all customers
-router.get('/:customerId', getCustomerMiddleware); // get particular customer
+router.get('/', getCustomers); // get all customers
+router.get('/:customerId', getCustomer); // get particular customer
 
 export default router;

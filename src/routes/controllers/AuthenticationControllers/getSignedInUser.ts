@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CustomersModel from '../../../models/Customers';
 
-export const getSignedInUserMiddleware = async (
+export const getSignedInUser = async (
   req: Request,
   res: Response
 ) => {

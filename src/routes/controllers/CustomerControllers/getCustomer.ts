@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import CustomersModel, { Customers } from '../../../models/Customers';
 
-export const getCustomerMiddleware = async (req: Request, res: Response) => {
+export const getCustomer = async (req: Request, res: Response) => {
   const customer: Customers | null = await CustomersModel.findById(
     req.params.customerId
   ).select('-password');

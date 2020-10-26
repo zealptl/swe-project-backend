@@ -1,12 +1,12 @@
 import express from 'express';
 import { authUserMiddleware } from './controllers/AuthenticationControllers/signInUser';
-import { getSignedInUserMiddleware } from './controllers/AuthenticationControllers/getSignedInUser';
+import { getSignedInUser } from './controllers/AuthenticationControllers/getSignedInUser';
 import { isUserSignedInMiddleware } from './middlewares/isUserSignedIn';
-import { signUpUserMiddleware } from './controllers/AuthenticationControllers/signUpUser';
+import { signUpUser } from './controllers/AuthenticationControllers/signUpUser';
 
 const router = express.Router();
 router.post('/signin', authUserMiddleware);
-router.get('/signin', isUserSignedInMiddleware, getSignedInUserMiddleware);
-router.post('/signup', signUpUserMiddleware);
+router.get('/signin', isUserSignedInMiddleware, getSignedInUser);
+router.post('/signup', signUpUser);
 
 export default router;
