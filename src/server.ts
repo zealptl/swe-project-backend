@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 // import routers below
 import healthRouter from './routes/health';
 import customerRouter from './routes/customer';
+import employeeRouter from './routes/employee';
 import managerRouter from './routes/manager';
 import authRouter from './routes/auth';
 
@@ -24,6 +25,7 @@ app.get('/', (req: Request, res: Response) => {
 // define router paths
 app.use('/api/health', healthRouter);
 app.use('/api/customers', jsonParser, customerRouter);
+app.use('/api/employees', jsonParser, employeeRouter);
 app.use('/api/manager', jsonParser, managerRouter);
 app.use('/api/auth', jsonParser, authRouter);
 
