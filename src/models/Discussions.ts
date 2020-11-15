@@ -15,4 +15,4 @@ const discussionSchema = new Schema({
   updated_at: { type: Date, default: Date.now },
 });
 
-export default model<Discussions>('Reviews', discussionSchema);
+export default model<Discussions>('Discussions', discussionSchema);
