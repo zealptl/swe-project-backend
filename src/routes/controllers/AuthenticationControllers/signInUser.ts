@@ -3,7 +3,7 @@ import CustomersModel from '../../../models/Customers';
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-export const authUserMiddleware = async (req: Request, res: Response) => {
+export const signInUser = async (req: Request, res: Response) => {
   try {
     const userRoles: any = {
       customer: CustomersModel,
@@ -30,13 +30,16 @@ export const authUserMiddleware = async (req: Request, res: Response) => {
       },
     };
 
+    // "deleting" password from object because we dont want to expose it
+    user.password = undefined;
+
     jwt.sign(
       payload,
       process.env.JWT_SECRET,
       { expiresIn: 3600000 }, // its in seconds, for now have an arbitrarily big num
       (err: Error, token: string) => {
         if (err) throw err;
-        res.json({ token });
+        res.json({ token, user });
       }
     );
   } catch (error) {

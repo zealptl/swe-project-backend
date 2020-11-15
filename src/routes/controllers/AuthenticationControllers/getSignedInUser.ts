@@ -1,10 +1,7 @@
 import { Request, Response } from 'express';
 import CustomersModel from '../../../models/Customers';
 
-export const getSignedInUser = async (
-  req: Request,
-  res: Response
-) => {
+export const getSignedInUser = async (req: Request, res: Response) => {
   try {
     const userRolesModels: any = {
       customer: CustomersModel,
