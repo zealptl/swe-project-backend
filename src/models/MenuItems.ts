@@ -10,6 +10,9 @@ export interface MenuItems extends Document {
   dietaryRestrictions: String[];
   image: String;
   type: String;
+  specialItem: Boolean;
+  created_at: Date;
+  updated_at: Date;
 }
 
 const menuItemsSchema = new Schema({
@@ -20,6 +23,18 @@ const menuItemsSchema = new Schema({
   dietaryRestrictions: Array,
   image: String,
   type: String,
+  specialItem: {
+    type: Boolean,
+    default: false,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-export default model<MenuItems>('MenuItemsModel', menuItemsSchema);
+export default model<MenuItems>('MenuItems', menuItemsSchema);
