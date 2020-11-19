@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 import healthRouter from './routes/health';
 import customerRouter from './routes/customer';
 import managerRouter from './routes/manager';
+import discussionRouter from './routes/discussion';
 import authRouter from './routes/auth';
 
 // init app
@@ -25,6 +26,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/health', healthRouter);
 app.use('/api/customers', jsonParser, customerRouter);
 app.use('/api/manager', jsonParser, managerRouter);
+app.use('/api/discussions', jsonParser, discussionRouter);
 app.use('/api/auth', jsonParser, authRouter);
 
 const PORT = process.env.PORT || 5000;
