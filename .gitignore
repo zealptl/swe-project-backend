@@ -8,3 +8,5 @@ build/
 
 SWEProject.pem
 sendgrid.env
+
+.DS_Store
