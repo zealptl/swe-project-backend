@@ -1,13 +1,11 @@
 import { Request, Response } from 'express';
 import CustomersModel from '../../../models/Customers';
+import userRoles from '../../../utils/userRolesModels';
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 export const signInUser = async (req: Request, res: Response) => {
   try {
-    const userRoles: any = {
-      customer: CustomersModel,
-    };
     const userRole: any = req.query.role;
 
     const user: any = await userRoles[userRole].findOne({
