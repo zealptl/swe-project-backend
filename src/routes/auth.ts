@@ -6,7 +6,7 @@ import { signUpUser } from './controllers/AuthenticationControllers/signUpUser';
 
 const router = express.Router();
 router.post('/signin', signInUser);
-router.get('/signin', isUserSignedInMiddleware, getSignedInUser);
+// router.get('/signin', isUserSignedInMiddleware, getSignedInUser);
 router.post('/signup', signUpUser);
 
 export default router;
