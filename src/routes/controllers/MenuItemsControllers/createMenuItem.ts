@@ -3,7 +3,7 @@ import MenuItemsModel, { MenuItems } from '../../../models/MenuItems';
 
 export const createMenuItem = async (req: Request, res: Response) => {
   try {
-    const menuItem = new MenuItemsModel({
+    const menuItem: MenuItems = new MenuItemsModel({
       title: req.body.title,
       chefName: req.body.chefName,
       description: req.body.description,
@@ -12,8 +12,6 @@ export const createMenuItem = async (req: Request, res: Response) => {
       type: req.body.type,
       image: req.file.filename,
     });
-
-    console.log(req.file);
 
     await menuItem.save();
 
