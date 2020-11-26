@@ -9,6 +9,8 @@ import customerRouter from './routes/customer';
 import employeeRouter from './routes/employee';
 import managerRouter from './routes/manager';
 import discussionRouter from './routes/discussion';
+import menuItemRouter from './routes/menuItems';
+import reviewRouter from './routes/review';
 import authRouter from './routes/auth';
 
 // init app
@@ -29,6 +31,8 @@ app.use('/api/customers', jsonParser, customerRouter);
 app.use('/api/employees', jsonParser, employeeRouter);
 app.use('/api/manager', jsonParser, managerRouter);
 app.use('/api/discussions', jsonParser, discussionRouter);
+app.use('/api/menuItems', jsonParser, menuItemRouter);
+app.use('/api/reviews', jsonParser, reviewRouter);
 app.use('/api/auth', jsonParser, authRouter);
 
 const PORT = process.env.PORT || 5000;

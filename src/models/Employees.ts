@@ -1,6 +1,4 @@
-import { Document, model, Mongoose, Schema } from 'mongoose';
-import { Reviews } from './Reviews';
-import { MenuItems } from './MenuItems';
+import { Document, model, Schema } from 'mongoose';
 
 export interface Employees extends Document {
   firstName: String;
@@ -9,8 +7,8 @@ export interface Employees extends Document {
   password: String;
   salary: number;
   type: String;
-  orders: Schema.Types.ObjectId;
-  reviews: Schema.Types.ObjectId;
+  orders: Array<String>;
+  reviews: Array<String>;
   averageRating: number;
   isApproved: boolean;
   demotedTimes: number;
@@ -44,10 +42,10 @@ const employeesSchema = new Schema({
     type: String,
   },
   orders: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
   reviews: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
   averageRating: {
     type: Number,

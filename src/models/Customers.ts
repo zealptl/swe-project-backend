@@ -1,6 +1,4 @@
-import { Document, model, Mongoose, Schema } from 'mongoose';
-import { Reviews } from './Reviews';
-import { MenuItems } from './MenuItems';
+import { Document, model, Schema } from 'mongoose';
 
 export interface Customers extends Document {
   password: string;
@@ -13,8 +11,8 @@ export interface Customers extends Document {
   isBlacklisted: boolean;
   amountSpent: number;
   balance: number;
-  ordersMade: Array<MenuItems>; // array of dishes
-  reviews: Array<Reviews>; // array of reviews
+  ordersMade: Array<String>; // array of dishes
+  reviews: Array<String>; // array of reviews
   warnings: number;
   created_at: Date;
   updated_at: Date;
@@ -63,10 +61,10 @@ const customersSchema: Schema = new Schema({
     default: 0,
   },
   ordersMade: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
   reviews: {
-    type: Array,
+    type: [Schema.Types.ObjectId],
   },
   warnings: {
     type: Number,
