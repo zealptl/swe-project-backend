@@ -7,9 +7,11 @@ export interface Employees extends Document {
   password: String;
   salary: number;
   type: String;
+  status: String;
   orders: Array<String>;
   reviews: Array<String>;
   averageRating: number;
+  score: number;
   isApproved: boolean;
   demotedTimes: number;
   created_at: Date;
@@ -36,9 +38,12 @@ const employeesSchema = new Schema({
   },
   salary: {
     type: Number,
-    default: 0,
+    default: 60000,
   },
   type: {
+    type: String,
+  },
+  status: {
     type: String,
   },
   orders: {
@@ -50,6 +55,10 @@ const employeesSchema = new Schema({
   averageRating: {
     type: Number,
     default: 5.0,
+  },
+  score: {
+    type: Number,
+    default: 6.0,
   },
   isApproved: {
     type: Boolean,
