@@ -9,6 +9,7 @@ export interface Customers extends Document {
   isApproved: boolean;
   isVIP: boolean;
   isBlacklisted: boolean;
+  score: number;
   amountSpent: number;
   balance: number;
   ordersMade: Array<String>; // array of dishes
@@ -51,6 +52,10 @@ const customersSchema: Schema = new Schema({
   isBlacklisted: {
     type: Boolean,
     default: false,
+  },
+  score: {
+    type: Number,
+    default: 0,
   },
   amountSpent: {
     type: Number,
