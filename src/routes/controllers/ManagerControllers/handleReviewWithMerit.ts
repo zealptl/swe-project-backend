@@ -4,7 +4,7 @@ import ReviewModel, { Reviews } from '../../../models/Reviews';
 import CustomersModel, { Customers } from '../../../models/Customers';
 import EmployeesModel, { Employees } from '../../../models/Employees';
 
-export const handleDiscussion = async (req: Request, res: Response) => {
+export const handleReviewWithMerit = async (req: Request, res: Response) => {
   try {
     const reviewID = req.params.reviewId;
     var reviewLink = 'http://localhost:5000/api/reviews/' + reviewID;

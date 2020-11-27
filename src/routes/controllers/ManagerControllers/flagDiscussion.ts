@@ -3,7 +3,7 @@ import axios, {AxiosResponse} from 'axios';
 import DiscussionsModel, { Discussions } from '../../../models/Discussions';
 import CustomersModel, { Customers } from '../../../models/Customers';
 
-export const handleDiscussion = async (req: Request, res: Response) => {
+export const flagDiscussion = async (req: Request, res: Response) => {
   try {
     const postID = req.params.discussionPostId;
     var discussionlink = 'http://localhost:5000/api/discussions/' + postID;
