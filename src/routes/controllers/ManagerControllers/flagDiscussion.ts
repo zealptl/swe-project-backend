@@ -6,30 +6,19 @@ import CustomersModel, { Customers } from '../../../models/Customers';
 export const flagDiscussion = async (req: Request, res: Response) => {
   try {
     const postID = req.params.discussionPostId;
-    var discussionlink = 'http://localhost:5000/api/discussions/' + postID;
+    var discussionLink = 'http://localhost:5000/api/discussions/' + postID;
+    const discussionPost = await axios.get(discussionLink);
+    var customerID = discussionPost.data.messageFrom; // get customerID of person who created the discussion post
 
-      axios.get(discussionlink)
-        .then((response : AxiosResponse) => {
-          var customerID = response.data.messageFrom; // get customerID of person who created the discussion post
 
-          var customerlink = 'http://localhost:5000/api/customers/' + customerID;
-          axios.get(customerlink)
-            .then((response2 : AxiosResponse) => {
-              var numOfWarnings = response2.data.warnings; // get number of warnings for customer
-              if (numOfWarnings < 3) {
-                await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-              }
-              else {
-                await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
-              }
-            })
-            .catch((error : Error) => {
-              console.log(error);
-            });
-        })
-        .catch((error : Error) => {
-          console.log(error);
-        });
+    var customerProfile = 'http://localhost:5000/api/customers/' + customerID;
+    const customer = await axios.get(customerProfile);
+    var numOfWarnings = customer.data.warnings; // get number of warnings for customer
+    if (numOfWarnings < 3)
+      await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
+    else
+      await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
+
 
     await DiscussionsModel.findByIdAndDelete(postID); // delete post
 
