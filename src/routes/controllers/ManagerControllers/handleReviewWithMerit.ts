@@ -16,9 +16,9 @@ export const handleDiscussion = async (req: Request, res: Response) => {
           var recipientID = response.data.reviewTo;
           var weight = 1;
 
-          if (senderType == "VIP")
+          if (senderType == "VIP") // if VIP, double weight
             weight = 2;
-          if (response.data.type == "Complaint")
+          if (response.data.type == "Complaint") // if complaint, make weight negative
             weight *= -1;
 
           if (recipientType == "DeliveryPerson") {
@@ -28,16 +28,16 @@ export const handleDiscussion = async (req: Request, res: Response) => {
                       var dpScore = response2.data.score; // get score for delivery person
                       var dpSalary = response2.data.demotedTimes; // get salary for delivery person
                       
-                      dpScore += weight;
+                      dpScore += weight; // update delivery person's current score
                       await EmployeesModel.findByIdAndUpdate(recipientID, { score: dpScore });
 
-                      if (dpScore == 0)
+                      if (dpScore == 0) // if delivery person score = 0, they are fired
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 2, status: "Fired" });
-                      else if (dpScore == 3)
+                      else if (dpScore == 3) // if delivery person score = 3, they are demoted
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 1, salary: dpSalary - 5000 });
-                      else if (dpScore == 6)
+                      else if (dpScore == 6) // if delivery person score = 6, their demotion history is cleared
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 0 });
-                      else (dpScore%3==0 && dpScore > 6)
+                      else (dpScore%3==0 && dpScore > 6) // if delivery person score > 6 and is divisible by 3, they are promoted
                           await EmployeesModel.findByIdAndUpdate(recipientID, { salary: dpSalary + 5000 });
                   })
                   .catch((error : Error) => {
@@ -51,16 +51,16 @@ export const handleDiscussion = async (req: Request, res: Response) => {
                       var chefScore = response2.data.score; // get score for chef
                       var chefSalary = response2.data.demotedTimes; // get salary for chef
                       
-                      chefScore += weight;
+                      chefScore += weight; // update chef's current score
                       await EmployeesModel.findByIdAndUpdate(recipientID, { score: dpScore });
 
-                      if (chefScore == 0)
+                      if (chefScore == 0) // if chef score = 0, they are fired
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 2, status: "Fired" });
-                      else if (chefScore == 3)
+                      else if (chefScore == 3) // if chef score = 3, they are demoted
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 1, salary: chefSalary - 5000 });
-                      else if (chefScore == 6)
+                      else if (chefScore == 6) // if chef score = 6, their demotion history is cleared
                           await EmployeesModel.findByIdAndUpdate(recipientID, { demotedTimes: 0 });
-                      else (chefScore%3==0 && chefScore > 6)
+                      else (chefScore%3==0 && chefScore > 6) // if chef score > 6 and is divisible by 3, they are promoted
                           await EmployeesModel.findByIdAndUpdate(recipientID, { salary: chefSalary + 5000 });
                   })
                   .catch((error : Error) => {
@@ -74,14 +74,14 @@ export const handleDiscussion = async (req: Request, res: Response) => {
                       var customerScore = response2.data.score; // get score for customer
                       var numOfWarnings = response2.data.warnings; // get number of warnings for customer
                       
-                      customerScore += weight;
+                      customerScore += weight; // update customer's current score
                       await EmployeesModel.findByIdAndUpdate(recipientID, { score: customerScore });
 
                       if (weight < 0) { // if customer received negative review
-                        if (numOfWarnings < 3) {
+                        if (numOfWarnings < 3) { // if numOfWarnings < 3, increment numOfWarnings
                           await CustomersModel.findByIdAndUpdate(recipientID, { warnings: ++numOfWarnings });
                         }
-                        else {
+                        else { // if numOfWarnings >= 3, blacklist customer
                           await CustomersModel.findByIdAndUpdate(recipientID, { isBlacklisted: true });
                         }
                       }
