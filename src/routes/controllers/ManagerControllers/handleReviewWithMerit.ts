@@ -25,7 +25,7 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
       const deliveryPerson = await axios.get(deliveryPersonProfile);
 
       var dpScore = deliveryPerson.data.score; // get score for delivery person
-      var dpSalary = deliveryPerson.data.demotedTimes; // get salary for delivery person
+      var dpSalary = deliveryPerson.data.salary; // get salary for delivery person
       
       dpScore += weight; // update delivery person's current score
       await EmployeesModel.findByIdAndUpdate(recipientID, { score: dpScore });
@@ -44,7 +44,7 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
       const chef = await axios.get(chefProfile);
 
       var chefScore = chef.data.score; // get score for chef
-      var chefSalary = chef.data.demotedTimes; // get salary for chef
+      var chefSalary = chef.data.salary; // get salary for chef
       
       chefScore += weight; // update chef's current score
       await EmployeesModel.findByIdAndUpdate(recipientID, { score: chefScore });
@@ -64,16 +64,21 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
 
       var customerScore = customer.data.score; // get score for customer
       var numOfWarnings = customer.data.warnings; // get number of warnings for customer
+      var vipStatus = customer.data.isVIP; // get VIP status for customer
       
       customerScore += weight; // update customer's current score
       await EmployeesModel.findByIdAndUpdate(recipientID, { score: customerScore });
 
       if (weight < 0) { // if customer received negative review
-        if (numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
+        if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
           await CustomersModel.findByIdAndUpdate(recipientID, { warnings: ++numOfWarnings });
-        else // if numOfWarnings >= 3, blacklist customer
+        else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
           await CustomersModel.findByIdAndUpdate(recipientID, { isBlacklisted: true });
-      }     
+        else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
+          await CustomersModel.findByIdAndUpdate(recipientID, { warnings: ++numOfWarnings });
+        else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
+          await CustomersModel.findByIdAndUpdate(recipientID, { isVIP: false, warnings: 0 });
+      }
     }
     res.json({ msg: 'Merit review was handled!' });
   } catch (error) {

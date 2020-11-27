@@ -25,11 +25,16 @@ export const handleReviewWithoutMerit = async (req: Request, res: Response) => {
         const customer = await axios.get(customerProfile);
 
         var numOfWarnings = customer.data.warnings; // get number of warnings for customer
+        var vipStatus = customer.data.isVIP; // get VIP status for customer
         
-        if (numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
-            await CustomersModel.findByIdAndUpdate(senderID, { warnings: ++numOfWarnings });
-        else // if numOfWarnings >= 3, blacklist customer
-            await CustomersModel.findByIdAndUpdate(senderID, { isBlacklisted: true });
+        if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
+          await CustomersModel.findByIdAndUpdate(senderID, { warnings: ++numOfWarnings });
+        else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
+          await CustomersModel.findByIdAndUpdate(senderID, { isBlacklisted: true });
+        else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
+          await CustomersModel.findByIdAndUpdate(senderID, { warnings: ++numOfWarnings });
+        else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
+          await CustomersModel.findByIdAndUpdate(senderID, { isVIP: false, warnings: 0 });
     }
     res.json({ msg: 'Non merit review was handled!' });
   } catch (error) {

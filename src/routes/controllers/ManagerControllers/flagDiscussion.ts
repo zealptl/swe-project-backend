@@ -14,11 +14,16 @@ export const flagDiscussion = async (req: Request, res: Response) => {
     var customerProfile = 'http://localhost:5000/api/customers/' + customerID;
     const customer = await axios.get(customerProfile);
     var numOfWarnings = customer.data.warnings; // get number of warnings for customer
-    if (numOfWarnings < 3)
-      await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-    else
-      await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
+    var vipStatus = customer.data.isVIP; // get VIP status for customer
 
+    if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
+      await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
+    else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
+      await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
+    else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
+      await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
+    else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
+      await CustomersModel.findByIdAndUpdate(customerID, { isVIP: false, warnings: 0 });
 
     await DiscussionsModel.findByIdAndDelete(postID); // delete post
 
