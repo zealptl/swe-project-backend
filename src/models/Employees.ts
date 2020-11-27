@@ -14,6 +14,7 @@ export interface Employees extends Document {
   score: number;
   isApproved: boolean;
   demotedTimes: number;
+  warnings: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -65,6 +66,10 @@ const employeesSchema = new Schema({
     default: false,
   },
   demotedTimes: {
+    type: Number,
+    default: 0,
+  },
+  warnings: {
     type: Number,
     default: 0,
   },

@@ -91,7 +91,7 @@ export const handleDiscussion = async (req: Request, res: Response) => {
                   });
           }
         }
-    res.json({ msg: 'Review was handled!' });
+    res.json({ msg: 'Merit review was handled!' });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: 'Server error' });
