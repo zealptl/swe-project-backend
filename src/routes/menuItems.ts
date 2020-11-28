@@ -3,6 +3,8 @@ import { getMenuItems } from './controllers/MenuItemsControllers/getMenuItems';
 import { getMenuItem } from './controllers/MenuItemsControllers/getMenuItem';
 import { createMenuItem } from './controllers/MenuItemsControllers/createMenuItem';
 import { getMenuItemImage } from './controllers/MenuItemsControllers/getMenuItemImage';
+import { isUserSignedInMiddleware } from '../routes/middlewares/isUserSignedIn';
+import { isUserAllowedMiddleware } from '../routes/middlewares/isUserAllowed';
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 const path = require('path');
@@ -73,4 +75,10 @@ router.post('/', upload.single('image'), createMenuItem);
 router.get('/', getMenuItems); // get all menu items
 router.get('/:menuItemId', getMenuItem); // get particular menu item
 router.get('/images/:filename', displayMenuItemImage);
+router.delete(
+  '/:menuItem',
+  isUserSignedInMiddleware,
+  isUserAllowedMiddleware(['manager', 'chef']),
+  deleteMenuItem
+);
 export default router;

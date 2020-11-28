@@ -5,7 +5,6 @@ import { getDiscussionPost } from './controllers/DiscussionController/getDiscuss
 import { updateDiscussion } from './controllers/DiscussionController/updateDiscussion';
 import { deleteDiscussionPost } from './controllers/DiscussionController/deleteDiscussionPost';
 
-
 const router = express.Router();
 router.post('/', postToDiscussion);
 router.get('/', getDiscussions);
