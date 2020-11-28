@@ -5,7 +5,7 @@ import { Document, model, Schema } from 'mongoose';
 export interface MenuItems extends Document {
   title: String;
   chefName: String;
-  chefId: String;
+  chefID: String;
   description: String;
   ingredients: String[];
   dietaryRestrictions: String[];
@@ -16,7 +16,7 @@ export interface MenuItems extends Document {
 const menuItemsSchema = new Schema({
   title: String,
   chefName: String,
-  chefId: Schema.Types.ObjectId,
+  chefID: Schema.Types.ObjectId,
   description: String,
   ingredients: Array,
   dietaryRestrictions: Array,

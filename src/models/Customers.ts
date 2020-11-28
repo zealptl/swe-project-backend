@@ -8,6 +8,8 @@ export interface Customers extends Document {
   address: string;
   isApproved: boolean;
   isVIP: boolean;
+  isBlacklisted: boolean;
+  score: number;
   amountSpent: number;
   balance: number;
   ordersMade: Array<String>; // array of dishes
@@ -46,6 +48,14 @@ const customersSchema: Schema = new Schema({
   isVIP: {
     type: Boolean,
     default: false,
+  },
+  isBlacklisted: {
+    type: Boolean,
+    default: false,
+  },
+  score: {
+    type: Number,
+    default: 0,
   },
   amountSpent: {
     type: Number,
