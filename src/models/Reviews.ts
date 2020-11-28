@@ -4,7 +4,9 @@ import { Document, model, Mongoose, Schema } from 'mongoose';
 export interface Reviews extends Document {
   review: String;
   reviewFrom: String;
+  reviewFromType: String;
   reviewTo: String;
+  reviewToType: String;
   starRating: String;
   type: String;
   created_at: Date;
@@ -14,7 +16,9 @@ export interface Reviews extends Document {
 const reviewSchema = new Schema({
   review: String,
   reviewFrom: Schema.Types.ObjectId,
+  reviewFromType: String,
   reviewTo: Schema.Types.ObjectId,
+  reviewToType: String,
   starRating: Number,
   type: String,
   created_at: { type: Date, default: Date.now },
