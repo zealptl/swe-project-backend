@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { getMenuItems } from './controllers/MenuItemsControllers/getMenuItems';
 import { getMenuItem } from './controllers/MenuItemsControllers/getMenuItem';
 import { createMenuItem } from './controllers/MenuItemsControllers/createMenuItem';
-import { getMenuItemImage } from './controllers/MenuItemsControllers/getMenuItemImage';
+import { deleteMenuItem } from './controllers/MenuItemsControllers/deleteMenuItem';
 import { isUserSignedInMiddleware } from '../routes/middlewares/isUserSignedIn';
 import { isUserAllowedMiddleware } from '../routes/middlewares/isUserAllowed';
 import mongoose from 'mongoose';
