@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import connectDB from './helpers/connectDB';
 const bodyParser = require('body-parser');
+var cors = require('cors')
 
 // import routers below
 import healthRouter from './routes/health';
@@ -18,6 +19,7 @@ dotenv.config();
 const app: Application = express();
 var jsonParser = bodyParser.json();
 app.use(bodyParser.json());
+app.use(cors())
 
 // connect to DB
 connectDB(process.env.DB_URI);
