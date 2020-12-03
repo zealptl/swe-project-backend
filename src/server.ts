@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import * as dotenv from 'dotenv';
 import connectDB from './helpers/connectDB';
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 // import routers below
 import healthRouter from './routes/health';
@@ -9,7 +9,7 @@ import customerRouter from './routes/customer';
 import employeeRouter from './routes/employee';
 import managerRouter from './routes/manager';
 import discussionRouter from './routes/discussion';
-import menuItemRouter from './routes/menuItems';
+import menuItemsRouter from './routes/menuItems';
 import reviewRouter from './routes/review';
 import authRouter from './routes/auth';
 
@@ -17,6 +17,7 @@ import authRouter from './routes/auth';
 dotenv.config();
 const app: Application = express();
 var jsonParser = bodyParser.json();
+app.use(bodyParser.json());
 
 // connect to DB
 connectDB(process.env.DB_URI);
@@ -31,7 +32,7 @@ app.use('/api/customers', jsonParser, customerRouter);
 app.use('/api/employees', jsonParser, employeeRouter);
 app.use('/api/manager', jsonParser, managerRouter);
 app.use('/api/discussions', jsonParser, discussionRouter);
-app.use('/api/menuItems', jsonParser, menuItemRouter);
+app.use('/api/menuItems', jsonParser, menuItemsRouter);
 app.use('/api/reviews', jsonParser, reviewRouter);
 app.use('/api/auth', jsonParser, authRouter);
 

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { createCustomer } from '../CustomerControllers/createCustomer';
 import { createEmployee } from '../EmployeeControllers/createEmployee';
+import { createManager } from '../ManagerControllers/createManager';
 
 export const signUpUser = async (req: Request, res: Response) => {
   try {
@@ -10,7 +11,13 @@ export const signUpUser = async (req: Request, res: Response) => {
         break;
 
       case 'chef':
+      case 'delivery':
         await createEmployee(req, res);
+        break;
+
+      case 'manager':
+        await createManager(req, res);
+        break;
 
       default:
         return res

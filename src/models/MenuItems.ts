@@ -5,21 +5,38 @@ import { Document, model, Schema } from 'mongoose';
 export interface MenuItems extends Document {
   title: String;
   chefName: String;
+  chefID: String;
   description: String;
   ingredients: String[];
   dietaryRestrictions: String[];
   image: String;
   type: String;
+  specialItem: Boolean;
+  created_at: Date;
+  updated_at: Date;
 }
 
 const menuItemsSchema = new Schema({
   title: String,
   chefName: String,
+  chefID: Schema.Types.ObjectId,
   description: String,
   ingredients: Array,
   dietaryRestrictions: Array,
   image: String,
   type: String,
+  specialItem: {
+    type: Boolean,
+    default: false,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
+  updated_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-export default model<MenuItems>('MenuItemsModel', menuItemsSchema);
+export default model<MenuItems>('MenuItems', menuItemsSchema);

@@ -10,7 +10,7 @@ export interface Discussions extends Document {
 
 const discussionSchema = new Schema({
   message: String,
-  messageFrom: String,
+  messageFrom: Schema.Types.ObjectId,
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
