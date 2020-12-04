@@ -29,26 +29,26 @@ export const signInUser = async (req: Request, res: Response) => {
       },
     };
 
-    console.log(userRole);
     var message : String;
 
-    // if 3 or more days have elapsed since employee completed an order, either demote or fire employee
-    if (userRole == "employee") {
+    if (userRole == "chef" || userRole == "delivery") {
       const employee: Employees | null = await EmployeesModel.findOne({
         _id: user.id,
       }).select('-password');
 
-      if (employee != null && ((employee.updated_at.getTime() - new Date().getTime())/(1000*3600*24)) >= 3) {
+      // if 3 or more days have elapsed since employee completed an order, either demote or fire employee
+      const currentDate = new Date();
+      if (employee != null && ((currentDate.getTime() - employee.updated_at.getTime())/(1000*3600*24)) >= 1) {        
         var employeeScore = employee.score;
         employeeScore = (employeeScore > 3 ? 3 : 0);
 
         if (employeeScore == 0) { // if employee score = 0, they are fired
-          await EmployeesModel.findByIdAndUpdate(user.id, { score: employeeScore, demotedTimes: 2, status: "Fired" });
+          await EmployeesModel.findByIdAndUpdate(user.id, { updated_at: currentDate, score: employeeScore, demotedTimes: 2, status: "Fired" });
           message = "Apologies you have been fired and no longer have access to the system.";
           res.json({ message });
         }
         else if (employeeScore == 3) { // if employee score = 3, they are demoted
-          await EmployeesModel.findByIdAndUpdate(user.id, { score: employeeScore, demotedTimes: 1, salary: employee.salary - 5000 });
+          await EmployeesModel.findByIdAndUpdate(user.id, { updated_at: currentDate, score: employeeScore, demotedTimes: 1, salary: employee.salary - 5000 });
           message = "You have been demoted.";
         }
       }
