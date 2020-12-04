@@ -3,7 +3,15 @@ import MenuItemsModel, { MenuItems } from '../../../models/MenuItems';
 
 export const createMenuItem = async (req: Request, res: Response) => {
   try {
-    const menuItem: MenuItems = new MenuItemsModel({
+    let menuItem: MenuItems | null = await MenuItemsModel.findOne({
+      title: req.body.title,
+    });
+
+    if (menuItem) {
+      return res.status(400).json({ msg: 'Menu Item already exists' });
+    }
+
+    menuItem = new MenuItemsModel({
       title: req.body.title,
       chefName: req.body.chefName,
       description: req.body.description,
