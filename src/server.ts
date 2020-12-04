@@ -12,6 +12,7 @@ import managerRouter from './routes/manager';
 import discussionRouter from './routes/discussion';
 import menuItemsRouter from './routes/menuItems';
 import reviewRouter from './routes/review';
+import blacklistRouter from './routes/blacklist';
 import authRouter from './routes/auth';
 
 // init app
@@ -36,6 +37,7 @@ app.use('/api/manager', jsonParser, managerRouter);
 app.use('/api/discussions', jsonParser, discussionRouter);
 app.use('/api/menuItems', jsonParser, menuItemsRouter);
 app.use('/api/reviews', jsonParser, reviewRouter);
+app.use('/api/blacklist', jsonParser, blacklistRouter);
 app.use('/api/auth', jsonParser, authRouter);
 
 const PORT = process.env.PORT || 5000;
