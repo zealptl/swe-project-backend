@@ -1,16 +1,16 @@
 import { Request, Response } from 'express';
-import DiscussionsModel, { Discussions } from '../../../models/Discussions';
+import OrdersModel, { Orders } from '../../../models/Orders';
 
-export const postToDiscussion = async (req: Request, res: Response) => {
+export const createOrder = async (req: Request, res: Response) => {
   try {
-    let discussion = new DiscussionsModel({
-      message: req.body.message,
-      messageFrom: req.body.messageFrom,
+    const order: Orders = new OrdersModel({
+        menuItem: req.body.menuItemID,
+        customer: req.body.customerID,
     });
 
-    await discussion.save();
+    await order.save();
 
-    res.json({ msg: 'Discussions post created!' });
+    res.json({ msg: 'Order submitted!' });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: 'Server error' });
