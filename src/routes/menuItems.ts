@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import { getMenuItems } from './controllers/MenuItemsControllers/getMenuItems';
 import { getMenuItem } from './controllers/MenuItemsControllers/getMenuItem';
+import { getTopThreeOverall } from './controllers/MenuItemsControllers/getTopThreeOverall';
+import { getForYou } from './controllers/MenuItemsControllers/getForYou';
 import { createMenuItem } from './controllers/MenuItemsControllers/createMenuItem';
 import { deleteMenuItem } from './controllers/MenuItemsControllers/deleteMenuItem';
 import { isUserSignedInMiddleware } from '../routes/middlewares/isUserSignedIn';
@@ -73,6 +75,8 @@ const displayMenuItemImage = (req: Request, res: Response) => {
 const router = express.Router();
 router.post('/', upload.single('image'), createMenuItem);
 router.get('/', getMenuItems); // get all menu items
+router.get('/topThreeOverall', getTopThreeOverall); // get top 3 overall items
+router.get('/topThreeForYou', getForYou); // get top 3 items for customer
 router.get('/:menuItemId', getMenuItem); // get particular menu item
 router.get('/images/:filename', displayMenuItemImage);
 router.delete(

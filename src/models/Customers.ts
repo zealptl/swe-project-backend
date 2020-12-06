@@ -12,7 +12,7 @@ export interface Customers extends Document {
   score: number;
   amountSpent: number;
   balance: number;
-  ordersMade: Array<String>; // array of dishes
+  ordersMade: Array<string>; // array of dishes
   reviews: Array<String>; // array of reviews
   warnings: number;
   created_at: Date;
