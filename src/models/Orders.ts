@@ -2,7 +2,7 @@ import { Document, model, Mongoose, Schema } from 'mongoose';
 
 
 export interface Orders extends Document {
-  menuItem: String;
+  menuItem: string;
   customer: String;
   chef: String;
   deliveryPerson: String;

@@ -29,12 +29,10 @@ export const signInUser = async (req: Request, res: Response) => {
       },
     };
 
-    var message : String;
+    var msg : String;
 
     if (userRole == "chef" || userRole == "delivery") {
-      const employee: Employees | null = await EmployeesModel.findOne({
-        _id: user.id,
-      }).select('-password');
+      const employee: Employees = user;
 
       // if 3 or more days have elapsed since employee completed an order, either demote or fire employee
       const currentDate = new Date();
@@ -44,12 +42,12 @@ export const signInUser = async (req: Request, res: Response) => {
 
         if (employeeScore == 0) { // if employee score = 0, they are fired
           await EmployeesModel.findByIdAndUpdate(user.id, { updated_at: currentDate, score: employeeScore, demotedTimes: 2, status: "Fired" });
-          message = "Apologies you have been fired and no longer have access to the system.";
-          res.json({ message });
+          msg = "Apologies you have been fired and no longer have access to the system.";
+          res.json({ msg });
         }
         else if (employeeScore == 3) { // if employee score = 3, they are demoted
           await EmployeesModel.findByIdAndUpdate(user.id, { updated_at: currentDate, score: employeeScore, demotedTimes: 1, salary: employee.salary - 5000 });
-          message = "You have been demoted.";
+          msg = "You have been demoted.";
         }
       }
     }
@@ -63,7 +61,7 @@ export const signInUser = async (req: Request, res: Response) => {
       { expiresIn: 3600000 }, // its in seconds, for now have an arbitrarily big num
       (err: Error, token: string) => {
         if (err) throw err;
-        res.json({ token, user, message });
+        res.json({ token, user, msg });
       }
     );
   } catch (error) {
