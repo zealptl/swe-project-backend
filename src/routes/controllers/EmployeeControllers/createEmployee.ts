@@ -1,9 +1,25 @@
 import { Request, Response } from 'express';
 import EmployeesModel, { Employees } from '../../../models/Employees';
+import BlacklistedUserModel, {
+  BlacklistedUser,
+} from '../../../models/BlacklistedUser';
 const bcryptjs = require('bcryptjs');
 
 export const createEmployee = async (req: Request, res: Response) => {
   try {
+    // check if employee is blacklisted
+    const isUserBlacklisted: BlacklistedUser | null = await BlacklistedUserModel.findOne(
+      {
+        email: req.body.email,
+      }
+    );
+
+    if (isUserBlacklisted) {
+      return res
+        .status(401)
+        .json({ msg: 'Sorry this email has been blacklisted' });
+    }
+
     let employee: Employees | null = await EmployeesModel.findOne({
       email: req.body.email,
     });
