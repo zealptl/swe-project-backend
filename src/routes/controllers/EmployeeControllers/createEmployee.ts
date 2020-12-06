@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
 import EmployeesModel, { Employees } from '../../../models/Employees';
+import BlacklistedUserModel, {
+  BlacklistedUser,
+} from '../../../models/BlacklistedUser';
 const bcryptjs = require('bcryptjs');
 
 export const createEmployee = async (req: Request, res: Response) => {
