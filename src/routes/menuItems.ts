@@ -75,8 +75,8 @@ const displayMenuItemImage = (req: Request, res: Response) => {
 const router = express.Router();
 router.post('/', upload.single('image'), createMenuItem);
 router.get('/', getMenuItems); // get all menu items
-router.get('/getTopThreeOverall', getTopThreeOverall); // get top 3 overall items
-router.get('/getTopThreeForYou', getForYou); // get top 3 items for customer
+router.get('/topThreeOverall', getTopThreeOverall); // get top 3 overall items
+router.get('/topThreeForYou', getForYou); // get top 3 items for customer
 router.get('/:menuItemId', getMenuItem); // get particular menu item
 router.get('/images/:filename', displayMenuItemImage);
 router.delete(
