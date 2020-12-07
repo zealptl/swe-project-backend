@@ -1,6 +1,8 @@
 import express from 'express';
 import { createManager } from './controllers/ManagerControllers/createManager';
 import { getManager } from './controllers/ManagerControllers/getManager';
+import { getPendingCustomers } from './controllers/ManagerControllers/getPendingCustomers';
+import { getPendingEmployees } from './controllers/ManagerControllers/getPendingEmployees';
 import { approveCustomer } from './controllers/ManagerControllers/approveCustomer';
 import { hireEmployee } from './controllers/ManagerControllers/hireEmployee';
 import { handleReviewWithMerit } from './controllers/ManagerControllers/handleReviewWithMerit';
@@ -11,6 +13,8 @@ import { flagDiscussion } from './controllers/ManagerControllers/flagDiscussion'
 const router = express.Router();
 router.post('/', createManager);
 router.get('/:managerId', getManager);
+router.get('/customers/pending', getPendingCustomers);
+router.get('/employees/pending', getPendingEmployees);
 router.post('/approve/:customerId', approveCustomer);
 router.post('/hire/:employeeId', hireEmployee);
 router.post('/reviewWithMerit/:reviewId', handleReviewWithMerit);

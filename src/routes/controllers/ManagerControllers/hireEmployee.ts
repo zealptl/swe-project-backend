@@ -1,40 +1,35 @@
 import { Request, Response } from 'express';
-import axios, {AxiosResponse} from 'axios';
-
-const Employee = require("../../../models/Employees");
+import EmployeesModel, { Employees } from '../../../models/Employees';
 
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
-export const hireEmployee = (req: Request, res: Response) => {
-  Employee.findOneAndUpdate({ _id: req.params.employeeId }, { isApproved: true })
-    .then(() => {
-      var link = 'http://localhost:5000/api/employees/' + req.params.employeeId;
+export const hireEmployee = async (req: Request, res: Response) => {
+  const employeeId = req.params.employeeId;
+  const employee: Employees | null = await EmployeesModel.findById(employeeId);
 
-      axios.get(link) // retrieve email for employee
-        .then((response : AxiosResponse) => {
-          var email = response.data.email;
-          console.log(email);
+  if (employee) {
+    await EmployeesModel.findByIdAndUpdate(employeeId, { isApproved: true });
 
-          const msg = { // send an email confirmation to employee
-            to: email,
-            from: 'bhavesh.shah@macaulay.cuny.edu',
-            templateId: 'd-296b3c7a87534eedb896f5fc49bdb1d6',
-          }
-          sgMail
-            .send(msg)
-            .then(() => {
-              console.log('Email sent')
-            })
-            .catch((error : Error) => {
-              console.error(error)
-            })
-        })
-        .catch((error : Error) => {
-          console.log(error);
-        });
+    var email = employee.email;
+    console.log(email);
 
-      res.status(202).json("Employee hired");
-    })
-    .catch((err : Error) => res.status(500).json(err));
+    const msg = { // send an email confirmation to employee
+      to: email,
+      from: 'foodtopia322@gmail.com',
+      templateId: 'd-2a58c0cc781044039ce2485164092a02',
+    }
+    sgMail
+      .send(msg)
+      .then(() => {
+        console.log('Email sent')
+      })
+      .catch((error : Error) => {
+        console.error(error)
+      })
+
+    res.status(202).json("Employee hired");
+  }
+  else
+    res.status(404).json({ msg: 'Employee not found' });
 };
