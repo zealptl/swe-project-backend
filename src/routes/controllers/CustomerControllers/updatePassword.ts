@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import CustomersModel, { Customers } from '../../../models/Customers';
 const bcryptjs = require('bcryptjs');
 
-export const updateCustomer = async (req: Request, res: Response) => {
+export const updatePassword = async (req: Request, res: Response) => {
   try {
     const id = req.params.customerId;
     let updatedPassword: string = req.body.password;
