@@ -12,6 +12,7 @@ export interface MenuItems extends Document {
   image: String;
   type: String;
   specialItem: Boolean;
+  price: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -29,6 +30,7 @@ const menuItemsSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  price: Number,
   created_at: {
     type: Date,
     default: Date.now,

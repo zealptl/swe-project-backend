@@ -7,6 +7,9 @@ export const createMenuItem = async (req: Request, res: Response) => {
       title: req.body.title,
     });
 
+    const ingredients = req.body.ingredients.split(', ');
+    const dietaryRestrictions = req.body.dietaryRestrictions.split(', ');
+
     if (menuItem) {
       return res.status(400).json({ msg: 'Menu Item already exists' });
     }
@@ -15,9 +18,10 @@ export const createMenuItem = async (req: Request, res: Response) => {
       title: req.body.title,
       chefName: req.body.chefName,
       description: req.body.description,
-      ingredients: req.body.ingredients,
-      dietaryRestrictions: req.body.dietaryRestrictions,
+      ingredients,
+      dietaryRestrictions,
       type: req.body.type,
+      price: req.body.price,
       image: req.file.filename,
     });
 
