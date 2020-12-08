@@ -14,7 +14,7 @@ export const getReviews = async (req: Request, res: Response) => {
 
   const reviews: Reviews[] | null = await ReviewsModel.find(query);
 
-  if (reviews.length) 
+  if (reviews.length == 0) 
     res.status(404).json({ msg: 'Reviews not found' });
 
   res.json(reviews);
