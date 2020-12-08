@@ -7,11 +7,19 @@ export const cookOrder = async (req: Request, res: Response) => {
     const id = req.params.orderId;
 
     // change order status to cooked and assign chefID as chef who cooked the order
-    const order = await OrdersModel.findByIdAndUpdate(id, { status: "Cooked", chef: req.body.chefID });
+    const order = await OrdersModel.findByIdAndUpdate(
+      id,
+      { status: 'Cooked', chef: req.body.chefID },
+      { new: true } // to retrieve updated document
+    );
 
     // add order to the list of orders the chef worked on, and modify updated_at date
     const currentDate = new Date();
-    await EmployeesModel.findByIdAndUpdate(req.body.chefID, { updated_at: currentDate, $push: {"orders": id} }, {new : true});
+    await EmployeesModel.findByIdAndUpdate(
+      req.body.chefID,
+      { updated_at: currentDate, $push: { orders: id } },
+      { new: true }
+    );
 
     res.json(order);
   } catch (error) {
