@@ -5,6 +5,7 @@ import { getTopThreeOverall } from './controllers/MenuItemsControllers/getTopThr
 import { getForYou } from './controllers/MenuItemsControllers/getForYou';
 import { createMenuItem } from './controllers/MenuItemsControllers/createMenuItem';
 import { deleteMenuItem } from './controllers/MenuItemsControllers/deleteMenuItem';
+import { getAverageMenuItemRating } from './controllers/MenuItemsControllers/getAverageMenuItemRating';
 import { isUserSignedInMiddleware } from '../routes/middlewares/isUserSignedIn';
 import { isUserAllowedMiddleware } from '../routes/middlewares/isUserAllowed';
 import mongoose from 'mongoose';
@@ -79,6 +80,7 @@ router.get('/topThreeOverall', getTopThreeOverall); // get top 3 overall items
 router.get('/topThreeForYou', getForYou); // get top 3 items for customer
 router.get('/:menuItemId', getMenuItem); // get particular menu item
 router.get('/images/:filename', displayMenuItemImage);
+router.get('/averageRating/:menuItemId', getAverageMenuItemRating);
 router.delete(
   '/:menuItem',
   isUserSignedInMiddleware,

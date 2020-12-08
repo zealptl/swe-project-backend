@@ -1,13 +1,12 @@
 import { Document, model, Mongoose, Schema } from 'mongoose';
 
-
 export interface Reviews extends Document {
   review: String;
   reviewFrom: String;
   reviewFromType: String;
   reviewTo: String;
   reviewToType: String;
-  starRating: String;
+  starRating: number;
   type: String;
   created_at: Date;
   updated_at: Date;
