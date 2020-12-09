@@ -8,6 +8,7 @@ export interface Reviews extends Document {
   reviewToType: String;
   starRating: number;
   type: String;
+  needToBeHandled: boolean;
   created_at: Date;
   updated_at: Date;
 }
@@ -20,6 +21,7 @@ const reviewSchema = new Schema({
   reviewToType: String,
   starRating: Number,
   type: String,
+  needToBeHandled: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
 });
