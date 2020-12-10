@@ -77,7 +77,7 @@ const router = express.Router();
 router.post('/', upload.single('image'), createMenuItem);
 router.get('/', getMenuItems); // get all menu items
 router.get('/topThreeOverall', getTopThreeOverall); // get top 3 overall items
-router.get('/topThreeForYou', getForYou); // get top 3 items for customer
+router.get('/topThreeForYou/:customerID', getForYou); // get top 3 items for customer
 router.get('/:menuItemId', getMenuItem); // get particular menu item
 router.get('/images/:filename', displayMenuItemImage);
 router.get('/averageRating/:menuItemId', getAverageMenuItemRating);

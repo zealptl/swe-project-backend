@@ -7,7 +7,7 @@ export const getForYou = async (req: Request, res: Response) => {
   let menuItemsIdsArr: string[] = [];
 
   const customer: Customers | null = await CustomersModel.findById(
-    req.body.customerID
+    req.params.customerID
   ).select('-password');
 
   if (customer != null) {
