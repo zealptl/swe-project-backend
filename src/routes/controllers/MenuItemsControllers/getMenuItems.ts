@@ -6,6 +6,7 @@ export const getMenuItems = async (req: Request, res: Response) => {
 
   if (req.query.chefName) query.chefName = req.query.chefName;
   if (req.query.type) query.type = req.query.type;
+  if (req.query.chefID) query.chefID = req.query.chefID;
 
   const menuItems: MenuItems[] | null = await MenuItemsModel.find(query);
 

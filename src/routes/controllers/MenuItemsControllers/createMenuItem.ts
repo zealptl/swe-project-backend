@@ -17,6 +17,7 @@ export const createMenuItem = async (req: Request, res: Response) => {
     menuItem = new MenuItemsModel({
       title: req.body.title,
       chefName: req.body.chefName,
+      chefID: req.body.chefID,
       description: req.body.description,
       ingredients,
       dietaryRestrictions,
