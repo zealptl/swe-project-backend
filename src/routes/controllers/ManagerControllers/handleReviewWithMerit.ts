@@ -9,6 +9,8 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
     const review: Reviews | null = await ReviewModel.findById(req.params.reviewId);
 
     if (review) {
+      await ReviewModel.findByIdAndUpdate(req.params.reviewId, { isApproved: true });
+
       var senderType = review.reviewFromType; 
       var recipientType = review.reviewToType; 
       var recipientID = review.reviewTo;
