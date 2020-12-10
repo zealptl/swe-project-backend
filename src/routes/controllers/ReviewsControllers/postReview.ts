@@ -13,7 +13,7 @@ export const postReview = async (req: Request, res: Response) => {
 
     await review.save();
 
-    res.json({ msg: 'Review posted!' });
+    res.json({ review });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: 'Server error' });
