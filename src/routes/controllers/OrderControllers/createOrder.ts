@@ -8,7 +8,21 @@ export const createOrder = async (req: Request, res: Response) => {
       menuItem: req.body.menuItemID,
       customer: req.body.customerID,
       deliveryNeeded: req.body.deliveryNeeded,
+      price: req.body.price,
     });
+
+    const customer: Customers | null = await CustomersModel.findById(
+      req.body.customerID
+    );
+
+    if (!customer) return res.status(404).json({ msg: 'Customer not found' });
+
+    // set new amount spent
+    const newAmountSpent = customer.amountSpent + req.body.price;
+
+    // set isVIP to true if customer has made 50 or more orders or spent 500 or more
+    const vipStatus =
+      customer.ordersMade.length >= 49 || newAmountSpent >= 500 ? true : false; // >=49 because the current order hasnt been put into customer obj
 
     // save order to order collection
     await order.save();
@@ -16,7 +30,11 @@ export const createOrder = async (req: Request, res: Response) => {
     // add menu item to the list of menu items the customer has ordered
     await CustomersModel.findByIdAndUpdate(
       req.body.customerID,
-      { $push: { ordersMade: req.body.menuItemID } },
+      {
+        $push: { ordersMade: req.body.menuItemID },
+        amountSpent: newAmountSpent,
+        isVIP: vipStatus,
+      },
       { new: true }
     );
 
