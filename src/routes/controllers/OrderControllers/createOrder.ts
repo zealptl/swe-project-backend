@@ -20,6 +20,9 @@ export const createOrder = async (req: Request, res: Response) => {
     // set new amount spent
     const newAmountSpent = customer.amountSpent + req.body.price;
 
+    // set new balance
+    const newBalance = customer.balance - req.body.price;
+
     // set isVIP to true if customer has made 50 or more orders or spent 500 or more
     const vipStatus =
       customer.ordersMade.length >= 49 || newAmountSpent >= 500 ? true : false; // >=49 because the current order hasnt been put into customer obj
@@ -33,6 +36,7 @@ export const createOrder = async (req: Request, res: Response) => {
       {
         $push: { ordersMade: req.body.menuItemID },
         amountSpent: newAmountSpent,
+        balance: newBalance,
         isVIP: vipStatus,
       },
       { new: true }
