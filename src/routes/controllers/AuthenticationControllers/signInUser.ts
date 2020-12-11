@@ -11,24 +11,40 @@ export const signInUser = async (req: Request, res: Response) => {
   try {
     const userRole: any = req.query.role;
 
-    const isUserBlacklisted: BlacklistedUser | null = await BlacklistedUserModel.findOne(
-      { email: req.body.email }
-    );
-
-    if (isUserBlacklisted) {
-      return res
-        .status(401)
-        .json({ msg: 'Sorry this account been blacklisted' });
-    }
-
     const user: any = await userRoles[userRole].findOne({
       email: req.body.email,
     });
 
     if (!user) res.status(401).json({ msg: 'Invalid Credentials' });
 
-    // if user if employee then he/she must match the type of employee to userRole
+    // properly auth customer type
+    if (userRole === 'customer') {
+      // if user isnt approved then deny
+      if (user.isApprroved === false)
+        return res.status(401).json({ msg: 'Account waiting for approval' });
+
+      // if user is customer then check if is blacklisted
+      if (user.isBlacklisted) {
+        return res
+          .status(401)
+          .json({ msg: 'Sorry this account been blacklisted' });
+      }
+    }
+
+    // properly auth employee type
     if (userRole === 'chef' || userRole === 'delivery') {
+      // if user isnt approved then deny
+      if (user.isApprroved === false)
+        return res.status(401).json({ msg: 'Account waiting for approval' });
+
+      // if user is chef || delivery then check if is blacklisted
+      if (user.status === 'Fired') {
+        return res
+          .status(401)
+          .json({ msg: 'Sorry this account been blacklisted' });
+      }
+
+      // if user if employee then he/she must match the type of employee to userRole
       if (user.type !== userRole) {
         return res.status(401).json({ msg: 'Invalid Credentials' });
       }
