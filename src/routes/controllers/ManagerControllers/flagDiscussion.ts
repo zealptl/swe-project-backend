@@ -5,34 +5,27 @@ import CustomersModel, { Customers } from '../../../models/Customers';
 
 export const flagDiscussion = async (req: Request, res: Response) => {
   try {
-    const postID = req.params.discussionPostId;
-    const discussionPost: Discussions | null = await DiscussionsModel.findById(postID);
+    var customerID = req.params.customerID; // get customerID of person who created the discussion post
 
-    if (discussionPost) {
-      var customerID = discussionPost.messageFrom; // get customerID of person who created the discussion post
-      const customer: Customers | null = await CustomersModel.findById(customerID);
+    const customer: Customers | null = await CustomersModel.findById(customerID);
 
-      if (customer) {
-        var numOfWarnings = customer.warnings; // get number of warnings for customer
-        var vipStatus = customer.isVIP; // get VIP status for customer
+    if (customer) {
+      var numOfWarnings = customer.warnings; // get number of warnings for customer
+      var vipStatus = customer.isVIP; // get VIP status for customer
 
-        if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
-          await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-        else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
-          await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
-        else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
-          await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-        else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
-          await CustomersModel.findByIdAndUpdate(customerID, { isVIP: false, warnings: 0 });
+      if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
+        await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
+      else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
+        await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
+      else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
+        await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
+      else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
+        await CustomersModel.findByIdAndUpdate(customerID, { isVIP: false, warnings: 0 });
 
-        await DiscussionsModel.findByIdAndDelete(postID); // delete post
-        res.json({ msg: 'Discussion post deleted!' });
-      }
-      else
-        res.status(404).json({ msg: 'Customer not found' });      
+      res.json({ msg: 'Flagged post was taken care of!' });
     }
     else
-      res.status(404).json({ msg: 'Discussion post not found' });
+      res.status(404).json({ msg: 'Customer not found' });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: 'Server error' });

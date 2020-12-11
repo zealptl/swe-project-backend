@@ -21,7 +21,7 @@ router.post('/approve/:customerId', approveCustomer);
 router.post('/hire/:employeeId', hireEmployee);
 router.post('/reviewWithMerit/:reviewId', handleReviewWithMerit);
 router.post('/reviewWithoutMerit/:reviewId', handleReviewWithoutMerit);
-router.post('/discussion/:discussionPostId', flagDiscussion);
+router.post('/discussion/:customerID', flagDiscussion);
 
 
 export default router;
