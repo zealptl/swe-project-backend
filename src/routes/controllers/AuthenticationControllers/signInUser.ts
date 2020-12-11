@@ -27,6 +27,13 @@ export const signInUser = async (req: Request, res: Response) => {
 
     if (!user) res.status(401).json({ msg: 'Invalid Credentials' });
 
+    // if user if employee then he/she must match the type of employee to userRole
+    if (userRole === 'chef' || userRole === 'delivery') {
+      if (user.type !== userRole) {
+        return res.status(401).json({ msg: 'Invalid Credentials' });
+      }
+    }
+
     const isMatch: boolean = await bcryptjs.compare(
       req.body.password,
       user.password
