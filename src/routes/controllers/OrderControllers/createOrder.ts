@@ -17,6 +17,10 @@ export const createOrder = async (req: Request, res: Response) => {
 
     if (!customer) return res.status(404).json({ msg: 'Customer not found' });
 
+    // deny request if insufficient balance
+    if (req.body.price > customer.balance)
+      return res.status(400).json({ msg: 'Insufficient balance' });
+
     // set new amount spent
     const newAmountSpent = customer.amountSpent + req.body.price;
 
@@ -42,7 +46,7 @@ export const createOrder = async (req: Request, res: Response) => {
       { new: true }
     );
 
-    res.json({ msg: 'Order submitted!' });
+    res.json(order);
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ msg: 'Server error' });
