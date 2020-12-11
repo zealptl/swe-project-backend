@@ -8,7 +8,7 @@ export const needToHandleReview = async (req: Request, res: Response) => {
     console.log('In need to handle');
     const updatedReview: Reviews | null = await ReviewsModel.findByIdAndUpdate(
       id,
-      { needToBeHandled: true },
+      { needToBeHandled: true, isApproved: false },
       { new: true }
     );
 
