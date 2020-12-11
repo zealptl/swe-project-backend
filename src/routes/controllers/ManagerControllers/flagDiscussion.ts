@@ -13,13 +13,13 @@ export const flagDiscussion = async (req: Request, res: Response) => {
       var numOfWarnings = customer.warnings; // get number of warnings for customer
       var vipStatus = customer.isVIP; // get VIP status for customer
 
-      if (vipStatus == false && numOfWarnings < 3) // if numOfWarnings < 3, increment numOfWarnings
+      if (vipStatus == false && numOfWarnings+1 < 3) // if numOfWarnings < 3, increment numOfWarnings
         await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-      else if (vipStatus == false && numOfWarnings >= 3) // if numOfWarnings >= 3, blacklist customer
+      else if (vipStatus == false && numOfWarnings+1 >= 3) // if numOfWarnings >= 3, blacklist customer
         await CustomersModel.findByIdAndUpdate(customerID, { isBlacklisted: true });
-      else if (vipStatus == true && numOfWarnings < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
+      else if (vipStatus == true && numOfWarnings+1 < 2) // if VIP and numOfWarnings < 2, increment numOfWarnings
         await CustomersModel.findByIdAndUpdate(customerID, { warnings: ++numOfWarnings });
-      else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
+      else if (vipStatus == true && numOfWarnings+1 >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
         await CustomersModel.findByIdAndUpdate(customerID, { isVIP: false, warnings: 0 });
 
       res.json(customer);
