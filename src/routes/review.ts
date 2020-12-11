@@ -15,7 +15,7 @@ router.patch('/needToHandle/:reviewId', needToHandleReview); // sets needToBeHan
 router.delete(
   '/:reviewId',
   isUserSignedInMiddleware,
-  isUserAllowedMiddleware(['manager', 'customer', 'delivery']),
+  isUserAllowedMiddleware(['manager']),
   deleteReview
 );
 
