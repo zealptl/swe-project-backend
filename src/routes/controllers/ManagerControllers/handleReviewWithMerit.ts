@@ -3,6 +3,7 @@ import axios, {AxiosResponse} from 'axios';
 import ReviewModel, { Reviews } from '../../../models/Reviews';
 import CustomersModel, { Customers } from '../../../models/Customers';
 import EmployeesModel, { Employees } from '../../../models/Employees';
+import MenuItemsModel, { MenuItems } from '../../../models/MenuItems';
 
 export const handleReviewWithMerit = async (req: Request, res: Response) => {
   try {
@@ -15,6 +16,7 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
       var recipientType = review.reviewToType; 
       var recipientID = review.reviewTo;
       var reviewType = review.type;
+      var starRating = review.starRating;
       var weight = 1;
 
       if (senderType == "VIP") // if VIP, double weight
@@ -90,6 +92,19 @@ export const handleReviewWithMerit = async (req: Request, res: Response) => {
         }
         else
           res.status(404).json({ msg: 'Customer not found' });
+      }
+      else if (recipientType == "MenuItem") {
+        const menuItem: MenuItems | null = await MenuItemsModel.findById(recipientID);
+          
+        if (menuItem) {
+          var menuItemScore = menuItem.starRating; // get average score for menu item
+          var reviewsSize = menuItem.numOfReviews; // get num of reviews for menu item
+          
+          menuItemScore = ((menuItemScore * reviewsSize) + weight) / (reviewsSize+1); // update menu item's current score
+          await MenuItemsModel.findByIdAndUpdate(recipientID, { starRating: menuItemScore, numOfReviews: ++reviewsSize });
+        }
+        else
+          res.status(404).json({ msg: 'Menu item not found' });
       }
       res.json({ msg: 'Merit review was handled!' });
     }

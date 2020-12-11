@@ -13,6 +13,8 @@ export interface MenuItems extends Document {
   type: String;
   specialItem: Boolean;
   price: number;
+  starRating: number;
+  numOfReviews: number;
   created_at: Date;
   updated_at: Date;
 }
@@ -31,6 +33,14 @@ const menuItemsSchema = new Schema({
     default: false,
   },
   price: Number,
+  starRating: {
+    type: Number,
+    default: 0,
+  },
+  numOfReviews: {
+    type: Number,
+    default: 0,
+  },
   created_at: {
     type: Date,
     default: Date.now,
