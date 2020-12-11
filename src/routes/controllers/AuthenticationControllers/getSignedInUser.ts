@@ -9,7 +9,7 @@ export const getSignedInUser = async (req: Request, res: Response) => {
       .findById(req.currentUser.id)
       .select('-password');
 
-    res.json(user);
+    res.json({user, userRole});
   } catch (error) {
     console.error(error);
     res.status(500).json({ msg: 'Server Error' });
