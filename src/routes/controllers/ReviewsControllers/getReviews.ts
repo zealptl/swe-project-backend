@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import ReviewsModel, { Reviews } from '../../../models/Reviews';
 
 export const getReviews = async (req: Request, res: Response) => {
-  const query: any = { isApproved : false };
+  const query: any = { isApproved : true };
   if (req.query.reviewFrom) query.reviewFrom = req.query.reviewFrom;
 
   if (req.query.reviewTo) query.reviewTo = req.query.reviewTo;
