@@ -22,7 +22,7 @@ export const flagDiscussion = async (req: Request, res: Response) => {
       else if (vipStatus == true && numOfWarnings >= 2) // if VIP and numOfWarnings >= 2, get rid of VIP staus
         await CustomersModel.findByIdAndUpdate(customerID, { isVIP: false, warnings: 0 });
 
-      res.json({ msg: 'Flagged post was taken care of!' });
+      res.json(customer);
     }
     else
       res.status(404).json({ msg: 'Customer not found' });
