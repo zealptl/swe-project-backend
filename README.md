@@ -16,11 +16,11 @@ email: dvader@sith.org
 password: dvader
 
 ##### Chef
+email: askywalker@jediacademy.org
+password: askywalker
+
 email: gordonramsay@gmail.com
 password: Gordonramsay5*
-
-email: jeffbezos@gmail.com
-password: Jeffbezos1#
 
 ##### Delivery
 email: djarin@bountyguild.org
