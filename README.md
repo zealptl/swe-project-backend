@@ -4,6 +4,25 @@ This is the backend service the project. It was deleveloped by Bhavesh Shah, Zea
 
 Project description coming soon.
 
+
+## User Accounts (feel free to make your own account for any user)
+
+##### Customer
+email: lskywalker@jediacademy.org
+password: lskywalker
+
+##### Manager
+email: dvader@sith.org
+password: dvader
+
+##### Chef
+email: askywalker@jediacademy.org
+password: askywalker
+
+##### Delivery
+email: djarin@bountyguild.org
+password: djarin
+
 ## Setup
 
 ##### Clone the repository
