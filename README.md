@@ -26,12 +26,23 @@ Run the following to install the necessary dependencies
 npm i
 ```
 
-##### Setup MongoDB
+##### Setup env file
 
 Create a `.env` file in your repository folder, paste the following and replace your username, and password with your credentials
 
 ```
 DB_URI=mongodb+srv://username:password@swe-db.sejgt.mongodb.net/<dbname>?retryWrites=true&w=majority
+JWT_SECRET=MY_JWT_SECRET
+```
+
+##### Setup sendgrid
+
+Perform the following three steps in your terminal in the root directory and replace apikey with provided key
+
+```
+1) echo "export SENDGRID_API_KEY=apikey > sendgrid.env
+2) echo "sendgrid.env" >> .gitignore
+3) source ./sendgrid.env
 ```
 
 ## Repo Structure
@@ -75,7 +86,3 @@ Builds the app for production to the `build` folder.
 #### `npm run start`
 
 Runs production version of the code
-
-#### `npm run test`
-
-Runs the test files
