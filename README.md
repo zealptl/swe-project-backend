@@ -2,7 +2,7 @@
 
 This is the backend service the project. It was deleveloped by Bhavesh Shah, Zeal Patel, Greg Kimatov, Yihui Wuchen, and Victoria Yang for our Software Engineering class using Typescript, Node, Express, MongoDB, and Mongoose.
 
-Project description coming soon.
+Implementation Specs: https://github.com/zealptl/swe-project-backend/blob/master/Reports/Foodtopia%20Implementation%20Specs.pdf
 
 
 ## User Accounts
