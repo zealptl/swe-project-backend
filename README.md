@@ -26,6 +26,9 @@ password: Jeffbezos1#
 email: djarin@bountyguild.org
 password: djarin
 
+email: jeffbezos@gmail.com
+password: Jeffbezos1#
+
 ## Setup
 
 ##### Clone the repository
