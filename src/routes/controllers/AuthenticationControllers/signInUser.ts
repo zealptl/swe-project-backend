@@ -20,7 +20,7 @@ export const signInUser = async (req: Request, res: Response) => {
     // properly auth customer type
     if (userRole === 'customer') {
       // if user isnt approved then deny
-      if (user.isApprroved === false)
+      if (user.isApproved === false)
         return res.status(401).json({ msg: 'Account waiting for approval' });
 
       // if user is customer then check if is blacklisted
@@ -34,7 +34,7 @@ export const signInUser = async (req: Request, res: Response) => {
     // properly auth employee type
     if (userRole === 'chef' || userRole === 'delivery') {
       // if user isnt approved then deny
-      if (user.isApprroved === false)
+      if (user.isApproved === false)
         return res.status(401).json({ msg: 'Account waiting for approval' });
 
       // if user is chef || delivery then check if is blacklisted
