@@ -11,7 +11,7 @@ export const getOrders = async (req: Request, res: Response) => {
 
   if (type == 'customer') {
     // show orders that customer ordered
-    orders = await OrdersModel.find({ query });
+    orders = await OrdersModel.find(query);
     console.log(orders);
   }
   else if (type == 'chef')
