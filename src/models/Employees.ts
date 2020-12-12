@@ -46,6 +46,7 @@ const employeesSchema = new Schema({
   },
   status: {
     type: String,
+    default: 'PendingHire',
   },
   orders: {
     type: [Schema.Types.ObjectId],
