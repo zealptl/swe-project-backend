@@ -3,11 +3,17 @@ import OrdersModel, { Orders } from '../../../models/Orders';
 
 export const getOrders = async (req: Request, res: Response) => {
   const type = req.query.type;
+
+  const query: any = {};
+  if (req.query.customerID) query.customer = req.query.customerID;
+
   let orders: Orders[] | null;
 
-  if (type == 'customer')
+  if (type == 'customer') {
     // show orders that customer ordered
-    orders = await OrdersModel.find({ customer: req.params.customerID });
+    orders = await OrdersModel.find({ query });
+    console.log(orders);
+  }
   else if (type == 'chef')
     // show all orders that are pending
     orders = await OrdersModel.find({ status: 'Pending' });
