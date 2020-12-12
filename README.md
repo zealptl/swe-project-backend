@@ -18,6 +18,8 @@ password: dvader
 ##### Chef
 email: askywalker@jediacademy.org
 password: askywalker
+email: jeffbezos@gmail.com
+password: Jeffbezos1#
 
 ##### Delivery
 email: djarin@bountyguild.org
