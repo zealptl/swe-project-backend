@@ -23,6 +23,7 @@ export const createMenuItem = async (req: Request, res: Response) => {
       dietaryRestrictions,
       type: req.body.type,
       price: req.body.price,
+      specialItem: req.body.specialItem,
       image: req.file.filename,
     });
 
