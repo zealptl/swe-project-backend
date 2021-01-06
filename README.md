@@ -1,9 +1,9 @@
-# Software Engineering Project - Backend
+# Foodtopia - Backend
 
 This is the backend service the project. It was developed by Bhavesh Shah, Zeal Patel, Greg Kimatov, Yihui Wuchen, and Victoria Yang for our Software Engineering class using TypeScript, Node, Express, MongoDB, and Mongoose.
 
 
-Foodtopia is a platform which customers can use to have food be delivered to their home and a restaurant can use to find customers seamlessly. 
+**Foodtopia** is a platform which customers can use to have food be delivered to their home and a restaurant can use to find customers seamlessly. 
 
 There are 6 types of users in our system: surfers, regular customers, VIP customers, delivery people, chefs, and managers. Surfers can browse menu items but are unable to do anything else until they register and their account is approved. Registered customers can order food, review delivery people, chefs, and food quality, and potentially become a VIP customer. In addition to all of the perks of being a customer, VIPs can order food at a 10% discount, their reviews/ratings count twice as much as that of a regular customer, and they have access to special dishes. Meanwhile, the application also provides managers with an interface from which they can manage virtually everything on the application.
 
