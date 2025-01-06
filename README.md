@@ -113,9 +113,7 @@ It should print `Server started on port 5000` and `MongoDB Connected` if everyth
 Run this script to make requests using Postman.
 
 #### `npm run build`
-
 Builds the app for production to the `build` folder.
 
 #### `npm run start`
-
 Runs production version of the code
